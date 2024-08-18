@@ -1,5 +1,6 @@
 import cors from "cors";
 import craftsRouter from "./routes/crafts.route.js";
+import usersRouter from "./routes/users.route.js";
 import express from "express";
 const app = express();
 
@@ -12,6 +13,7 @@ app.get("/", function (request, response) {
 });
 
 app.use("/Crafts", craftsRouter);
+app.use("/users", usersRouter);
 
 app.listen(PORT, () => console.log(`The server started in: ${PORT} ✨✨`));
 
