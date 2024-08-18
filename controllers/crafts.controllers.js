@@ -1,4 +1,6 @@
 import { Crafts } from "../entities/crafts.entity.js";
+
+import { v4 as uuidv4 } from "uuid";
 import {
   editCraftsById,
   createcraft,
@@ -9,11 +11,11 @@ import {
 async function editCraftsByIdCtr(request, response) {
   const { id } = request.params;
   const UpdatedData = request.body;
-  const ExistingData = await Crafts.get({ movieId: id }).go();
+  const ExistingData = await Crafts.get({ craftId: id }).go();
   if (ExistingData.data) {
     await editCraftsById(ExistingData, UpdatedData);
     response.send({
-      msg: "movie edited successfully",
+      msg: "Craft edited successfully",
       data: UpdatedData,
     });
   } else {

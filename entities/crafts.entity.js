@@ -9,7 +9,7 @@ const Crafts = new Entity(
     },
     attributes: {
       craftId: {
-        type: "number",
+        type: "string",
         required: true,
       },
       title: {

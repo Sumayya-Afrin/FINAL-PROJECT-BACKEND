@@ -11,7 +11,7 @@ import { auth } from "../middleware/auth.middleware.js";
 const router = express.Router();
 
 router.get("/", getCraftsCtr);
-router.get("/:id", auth, getCraftsByIdCtr);
+router.get("/:id", getCraftsByIdCtr);
 router.delete("/del/:id", deleteCraftByIdCtr);
 router.post("/", createCraftByIdCtr);
 router.put("/:id", editCraftsByIdCtr);

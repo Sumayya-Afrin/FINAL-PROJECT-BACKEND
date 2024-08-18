@@ -13,7 +13,7 @@ async function deleteCraftById(id) {
 }
 
 async function getCraftsById(id) {
-  return await Crafts.get({ craftsId: id }).go();
+  return await Crafts.get({ craftId: id }).go();
 }
 
 async function getCrafts() {
