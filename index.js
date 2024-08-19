@@ -9,7 +9,7 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/", function (request, response) {
-  response.send("🙋‍♂️, 🌏 🎊✨🤩");
+  response.send("🎊✨🤩");
 });
 
 app.use("/Crafts", craftsRouter);

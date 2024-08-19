@@ -10,7 +10,7 @@ import { auth } from "../middleware/auth.middleware.js";
 
 const router = express.Router();
 
-router.get("/", auth, getCraftsCtr);
+router.get("/", getCraftsCtr);
 router.get("/:id", getCraftsByIdCtr);
 router.delete("/del/:id", deleteCraftByIdCtr);
 router.post("/", createCraftByIdCtr);
