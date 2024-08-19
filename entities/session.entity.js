@@ -10,7 +10,7 @@ const Session = new Entity(
       service: "sessionService",
     },
     attributes: {
-      userName: {
+      username: {
         type: "string",
         required: true,
       },
