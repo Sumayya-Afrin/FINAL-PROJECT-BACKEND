@@ -4,7 +4,7 @@ const Users = new Entity(
   {
     model: {
       entity: "Users",
-      version: "1",
+      version: "2",
       service: "UserService",
     },
     attributes: {
@@ -14,6 +14,10 @@ const Users = new Entity(
       },
       password: {
         type: "string",
+        required: true,
+      },
+      roleId: {
+        type: "number",
         required: true,
       },
     },

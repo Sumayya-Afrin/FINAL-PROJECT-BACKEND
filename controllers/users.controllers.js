@@ -1,6 +1,12 @@
-import { createUser, getUserByUsername } from "../services/users.service.js";
+import {
+  createUser,
+  getUserByUsername,
+  createSession,
+} from "../services/users.service.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { response } from "express";
+import { v4 } from "uuid";
 
 const genHashPassword = async (password) => {
   const NO_OF_ROUNDS = 10;
@@ -13,29 +19,38 @@ const genHashPassword = async (password) => {
 
 async function createUserCtr(request, response) {
   const data = request.body;
-
+  const password = data.password;
+  const roleId = 1;
+  if (data.password.length < 8) {
+    response.status(400).send({ msg: "password is too short" });
+    return;
+  }
   const userFromDB = await getUserByUsername(data.username);
   console.log(userFromDB);
-  if (!userFromDB.data) {
-    const hashedPassword = await genHashPassword(data.password);
-    try {
-      await createUser({
-        username: data.username,
-        password: hashedPassword,
-      });
-      response
-        .status(201)
-        .send({ msg: `${data.username} signed up successfully` });
-    } catch (error) {
-      response.status(500).send({ msg: "failed to signup" });
-    }
-  } else {
-    response.status(500).send({ msg: "username already taken" });
+
+  if (userFromDB.data) {
+    response.status(400).send({ msg: "User already exists" });
+    return;
+  }
+
+  const hashedPassword = await genHashPassword(data.password);
+  const hashedData = {
+    username: data.username,
+    password: hashedPassword,
+    roleId: roleId,
+  };
+  try {
+    await createUser(hashedData);
+    response.status(201).send(hashedData);
+    console.log(hashedData);
+  } catch (error) {
+    response.status(500).send({ msg: "failed to signup" });
   }
 }
 
 async function loginUserCtr(request, response) {
   const data = request.body;
+  const username = data.username;
   const userFromDB = await getUserByUsername(data.username);
   if (!userFromDB.data) {
     response.status(400).send({ msg: `invalid credentials` });
@@ -56,6 +71,8 @@ async function loginUserCtr(request, response) {
         process.env.SECRET_KEY
       );
       console.log(token);
+      const sessionData = { username, token };
+      await createSession(sessionData);
 
       response.status(200).send({ msg: `login successful`, token });
     } else {
