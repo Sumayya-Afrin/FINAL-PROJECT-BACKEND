@@ -12,7 +12,7 @@ app.get("/", function (request, response) {
   response.send("🎊✨🤩");
 });
 
-app.use("/Crafts", craftsRouter);
+app.use("/crafts", craftsRouter);
 app.use("/users", usersRouter);
 
 app.listen(PORT, () => console.log(`The server started in: ${PORT} ✨✨`));
