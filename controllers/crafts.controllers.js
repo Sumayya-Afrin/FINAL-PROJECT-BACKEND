@@ -55,8 +55,34 @@ async function getCraftsByIdCtr(request, response) {
 }
 
 async function getCraftsCtr(request, response) {
-  const allcrafts = await getCrafts();
-  response.send(allcrafts.data);
+  const { search } = request.query;
+
+  if (!search) {
+    const allCrafts = await getCrafts();
+    response.send(allCrafts.data);
+    return;
+  }
+
+  const filterData = await Crafts.scan
+    .where(
+      ({ title, description, category, price, imageUrl }, { contains }) => `
+      ${contains(title, search)} OR ${contains(
+        category,
+        search
+      )}  OR ${contains(imageUrl, search)} OR ${contains(
+        description,
+        search
+      )} OR ${contains(price, search)}
+      `
+    )
+    .go();
+
+  console.log(filterData);
+
+  response.send(filterData.data);
+
+  // const allcrafts = await getCrafts();
+  // response.send(allcrafts.data);
 }
 
 export {

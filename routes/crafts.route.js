@@ -12,7 +12,7 @@ const router = express.Router();
 
 router.get("/", getCraftsCtr);
 router.get("/:id", getCraftsByIdCtr);
-router.delete("/del/:id", deleteCraftByIdCtr);
+router.delete("/del/:id", auth, deleteCraftByIdCtr);
 router.post("/", createCraftByIdCtr);
 router.put("/:id", editCraftsByIdCtr);
 
