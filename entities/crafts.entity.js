@@ -4,7 +4,7 @@ const Crafts = new Entity(
   {
     model: {
       entity: "Crafts",
-      version: "1",
+      version: "3",
       service: "CraftsService",
     },
     attributes: {
@@ -49,7 +49,7 @@ const Crafts = new Entity(
     },
     // add your DocumentClient and TableName as a second parameter
   },
-  { client, table: "Crafts" }
+  { client, table: "CraftsTable" }
 );
 
 export { Crafts };

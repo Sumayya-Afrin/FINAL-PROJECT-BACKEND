@@ -59,6 +59,7 @@ async function getCraftsCtr(request, response) {
 
   if (!search) {
     const allCrafts = await getCrafts();
+    console.log("🧠🧠", allCrafts);
     response.send(allCrafts.data);
     return;
   }
