@@ -1,4 +1,4 @@
-import { cart } from "../entities/cart.entity.js";
+import { Cart } from "../entities/cart.entity.js";
 async function getAllCraftsFromCart() {
   return await cart.scan.go();
 }

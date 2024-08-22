@@ -1,4 +1,4 @@
-import { cart } from "../entities/cart.entity.js";
+import { Cart } from "../entities/cart.entity.js";
 import { Crafts } from "../entities/crafts.entity.js";
 import {
   getAllCraftsFromCart,

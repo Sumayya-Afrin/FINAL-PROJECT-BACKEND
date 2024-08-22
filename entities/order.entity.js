@@ -1,16 +1,21 @@
-import { Entity } from "electrodb"; //ORM
-import { client } from "../util/dbconnection.js";
+import { Entity } from "electrodb";
+import { client } from "../util/db_connection.js";
 
-const Cart = new Entity(
+const Order = new Entity(
   {
     model: {
-      entity: "Cart",
-      version: "2",
-      service: "cartService",
+      entity: "Order",
+      version: "1",
+      service: "OrderService",
     },
     attributes: {
+      orderId: {
+        type: "string",
+        required: true,
+      },
       userId: {
         type: "string",
+        required: true,
       },
       products: {
         type: "list",
@@ -40,19 +45,30 @@ const Cart = new Entity(
             },
             quantity: {
               type: "number",
+              required: true,
             },
           },
         },
+        required: true,
       },
       totalPrice: {
         type: "number",
+        required: true,
+      },
+      orderDate: {
+        type: "string",
+        required: true,
+      },
+      status: {
+        type: "string",
+        required: true,
       },
     },
     indexes: {
       primary: {
         pk: {
           field: "pk",
-          facets: ["userId"],
+          facets: ["orderId"],
         },
         sk: {
           field: "sk",
@@ -61,7 +77,7 @@ const Cart = new Entity(
       },
     },
   },
-  { client, table: "cartTable" }
+  { client, table: "orders" }
 );
 
-export { Cart };
+export { Order };
