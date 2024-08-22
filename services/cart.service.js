@@ -1,32 +1,19 @@
 import { Cart } from "../entities/cart.entity.js";
-async function getAllCraftsFromCart() {
-  return await cart.scan.go();
+
+async function getAllCartItem() {
+  return (await Cart.scan.go()).data;
 }
 
-async function addingCraftInCart(addProduct) {
-  return await cart.create(addProduct).go();
+async function createCartProduct(addCraft) {
+  await Cart.put(addCraft).go();
 }
 
-async function deleteCraftFromCart(userId) {
-  await cart.delete({ userId }).go();
+async function getUserIdById(Id) {
+  return await Cart.get({ userId: Id }).go();
 }
 
-async function getCraftByIdFromCart(userId) {
-  return await cart.get({ userId }).go();
-}
-async function updateCraftByIdInCart(userId, updateData) {
-  return await cart
-    .put({
-      userId,
-      ...updateData,
-    })
-    .go();
+async function deleteFromCartById(id) {
+  await Cart.delete({ userId: id }).go();
 }
 
-export {
-  getAllCraftsFromCart,
-  addingCraftInCart,
-  deleteCraftFromCart,
-  getCraftByIdFromCart,
-  updateCraftByIdInCart,
-};
+export { getAllCartItem, createCartProduct, getUserIdById, deleteFromCartById };

@@ -1,18 +1,19 @@
 import express from "express";
 // import cors from "cors";
-import { Crafts } from "../entities/crafts.entity.js";
-import {
-  getCraftByIdFromCartCtr,
-  deleteCraftFromCartCtr,
-  addingCraftsInCartCtr,
-  getAllCraftsFromCartCtr,
-} from "../controllers/cart.controllers.js";
-
 const router = express.Router();
 
-router.get("/", getAllCraftsFromCartCtr);
-router.get("/:id", getCraftByIdFromCartCtr);
-router.post("/add", addingCraftsInCartCtr);
-router.delete("/del/:id", deleteCraftFromCartCtr);
+import { auth } from "../middleware/auth.middleware.js";
+
+import {
+  getAllCartItemCtrl,
+  AddToCartCtrl,
+  deleteFromCartByIdCtrl,
+  tocheckuserid,
+} from "../controllers/cart.controllers.js";
+
+router.get("/", auth, getAllCartItemCtrl);
+router.post("/", auth, AddToCartCtrl);
+router.delete("/del", auth, deleteFromCartByIdCtrl);
+router.get("/:userId", tocheckuserid);
 
 export default router;

@@ -1,12 +1,12 @@
 import { Entity } from "electrodb";
-import { client } from "../util/db_connection.js";
+import { client } from "../util/dbconnection.js";
 
 const Order = new Entity(
   {
     model: {
       entity: "Order",
       version: "1",
-      service: "OrderService",
+      service: "OrdersService",
     },
     attributes: {
       orderId: {
@@ -22,10 +22,10 @@ const Order = new Entity(
         items: {
           type: "map",
           properties: {
-            productId: {
+            craftId: {
               type: "string",
             },
-            name: {
+            title: {
               type: "string",
             },
             description: {
@@ -34,13 +34,13 @@ const Order = new Entity(
             price: {
               type: "number",
             },
-            type: {
+            category: {
               type: "string",
             },
             StockQuantity: {
               type: "number",
             },
-            image: {
+            imageUrl: {
               type: "string",
             },
             quantity: {
@@ -77,7 +77,7 @@ const Order = new Entity(
       },
     },
   },
-  { client, table: "orders" }
+  { client, table: "ordersTable" }
 );
 
 export { Order };

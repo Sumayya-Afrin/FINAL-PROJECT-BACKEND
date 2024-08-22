@@ -1,26 +1,26 @@
-import { Entity } from "electrodb"; //ORM
+import { Entity } from "electrodb";
 import { client } from "../util/dbconnection.js";
 
 const Cart = new Entity(
   {
     model: {
-      entity: "Cart",
-      version: "2",
-      service: "cartService",
+      entity: "CartTable",
+      version: "1",
+      service: "CartsService",
     },
     attributes: {
       userId: {
         type: "string",
       },
-      products: {
+      crafts: {
         type: "list",
         items: {
           type: "map",
           properties: {
-            productId: {
+            craftId: {
               type: "string",
             },
-            name: {
+            title: {
               type: "string",
             },
             description: {
@@ -29,13 +29,13 @@ const Cart = new Entity(
             price: {
               type: "number",
             },
-            type: {
+            category: {
               type: "string",
             },
             StockQuantity: {
               type: "number",
             },
-            image: {
+            imageUrl: {
               type: "string",
             },
             quantity: {
