@@ -70,11 +70,15 @@ async function loginUserCtr(request, response) {
         },
         process.env.SECRET_KEY
       );
+
       console.log(token);
       const sessionData = { username, token };
+      const roleId = userFromDB.data.roleId;
       await createSession(sessionData);
 
-      response.status(200).send({ msg: `login successful`, token });
+      response
+        .status(200)
+        .send({ msg: `login successful`, token, roleId, username });
     } else {
       response.status(400).send({ msg: `invalid credentials` });
     }

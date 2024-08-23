@@ -33,7 +33,7 @@ const Crafts = new Entity(
         required: true,
       },
       StockQuantity: {
-        type: "string",
+        type: "number",
         required: true,
       },
     },
