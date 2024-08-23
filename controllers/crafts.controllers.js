@@ -57,6 +57,8 @@ async function getCraftsByIdCtr(request, response) {
 async function getCraftsCtr(request, response) {
   const { search } = request.query;
 
+  const { filter } = request.query;
+
   if (!search) {
     const allCrafts = await getCrafts();
     console.log("🧠🧠", allCrafts);

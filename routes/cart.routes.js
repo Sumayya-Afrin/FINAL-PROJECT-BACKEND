@@ -11,9 +11,9 @@ import {
   tocheckuserid,
 } from "../controllers/cart.controllers.js";
 
-router.get("/", auth, getAllCartItemCtrl);
-router.post("/", auth, AddToCartCtrl);
-router.delete("/del", auth, deleteFromCartByIdCtrl);
+router.get("/", getAllCartItemCtrl);
+router.post("/add", AddToCartCtrl);
+router.delete("/del", deleteFromCartByIdCtrl);
 router.get("/:userId", tocheckuserid);
 
 export default router;

@@ -4,7 +4,7 @@ const Crafts = new Entity(
   {
     model: {
       entity: "Crafts",
-      version: "3",
+      version: "4",
       service: "CraftsService",
     },
     attributes: {
@@ -29,6 +29,10 @@ const Crafts = new Entity(
         required: true,
       },
       imageUrl: {
+        type: "string",
+        required: true,
+      },
+      StockQuantity: {
         type: "string",
         required: true,
       },

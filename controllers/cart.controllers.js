@@ -7,7 +7,8 @@ import {
   deleteFromCartById,
 } from "../services/cart.service.js";
 import { v4 as uuidv4 } from "uuid";
-
+import { usernameToken } from "../services/users.service.js";
+import { auth } from "../middleware/auth.middleware.js";
 async function getAllCartItemCtrl(request, response) {
   try {
     response.send(await getAllCartItem());
