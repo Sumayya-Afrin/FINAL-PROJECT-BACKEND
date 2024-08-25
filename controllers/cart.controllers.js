@@ -18,14 +18,15 @@ async function getAllCartItemCtrl(request, response) {
 }
 
 async function AddToCartCtrl(request, response) {
-  const products = request.body;
+  const crafts = request.body;
+
   const token = request.headers["x-auth-token"];
   const userfromtoken = await usernameToken(token);
 
   let realProductsInDB = [];
 
-  for (const data of products) {
-    const id = data.productId;
+  for (const data of crafts) {
+    const id = data.craftId;
     const existingData = await getProductById(id);
     console.log(existingData);
     if (existingData.data.productId) {
@@ -35,7 +36,7 @@ async function AddToCartCtrl(request, response) {
 
   const totalPrice = calculateTotalPriceQty(realProductsInDB);
   const addCraft = {
-    products: realProductsInDB,
+    crafts: realProductsInDB,
     totalPrice: totalPrice,
     userId: userfromtoken.data.username,
   };
